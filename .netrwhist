@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/bhurlow/drive/code/artemisventure.com'
+let g:netrw_dirhist_2='/Users/bhurlow/drive/code/artemisventure.com/public'
+let g:netrw_dirhist_3='/Users/bhurlow/drive/code/adgholdingslllc.com/public'
+let g:netrw_dirhist_4='/Users/bhurlow/drive/code/invox/webapp/js'
+let g:netrw_dirhist_5='/Users/bhurlow/drive/code/artemisventure.com/public'
+let g:netrw_dirhist_6='/Users/bhurlow/drive/code/adgholdingslllc.com/public'
+let g:netrw_dirhist_7='/Users/bhurlow/drive/code/dot'
+let g:netrw_dirhist_8='/Users/bhurlow/drive/code/adgholdingslllc.com'
