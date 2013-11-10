@@ -3,7 +3,7 @@
 
 set nocompatible
 execute pathogen#infect()
-set tabstop=4
+set tabstop=2
 set shiftwidth=2
 set expandtab
 set nu
@@ -62,8 +62,15 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 map <C-n> :NERDTreeToggle<CR>
 
-" POWERLINE
 
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+" FONT
+set guifont=Menlo:h18
+
+" EMMET VIM
+let g:user_emmet_expandabbr_key = '<c-e>'
+" let g:user_emmet_expandabbr_key = '<Tab>'
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 
