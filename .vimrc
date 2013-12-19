@@ -64,7 +64,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 
 " FONT
-set guifont=Menlo:h18
+set guifont=Menlo:h15
 
 " EMMET VIM
 let g:user_emmet_expandabbr_key = '<c-e>'
