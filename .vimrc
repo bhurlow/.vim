@@ -6,6 +6,9 @@ execute pathogen#infect()
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set smarttab
+set autoindent
+set smartindent
 set nu
 filetype plugin indent on
 let mapleader = ","
@@ -73,4 +76,7 @@ let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
+
+:inoremap ( ()<Esc>i
+inoremap { {<CR><BS>}<Esc>ko
 
