@@ -77,6 +77,6 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
 
-:inoremap ( ()<Esc>i
-inoremap { {<CR><BS>}<Esc>ko
+":inoremap ( ()<Esc>i
+"inoremap { {<CR><BS>}<Esc>ko
 
