@@ -30,6 +30,7 @@ set nowrap
 set textwidth=79
 set formatoptions=qrn1
 set pastetoggle=<leader>p
+set cmdwinheight=20
 
 " NO SWAP FILES
 
@@ -48,7 +49,8 @@ set undodir=~/.vimundo
 syntax enable
 syntax on
 set background=light
-colorscheme github
+"colorscheme github
+colorscheme Monokai
 
 
 " KEY MAPPING
@@ -64,7 +66,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 map <C-n> :NERDTreeToggle<CR>
-
+noremap % v% 
 
 " FONT
 set guifont=Menlo:h13
@@ -76,7 +78,31 @@ let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
+let b:vimpipe_command="psql if"
 
 ":inoremap ( ()<Esc>i
 "inoremap { {<CR><BS>}<Esc>ko
+
+autocmd filetype lisp,scheme,art,clj setlocal equalprg=lispindent.lisp
+
+" Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  "let g:ctrlp_use_caching = 0
+endif
+
+" bind to grep word under cursor
+
+"nnoremap H :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+nnoremap H :! ag --nocolor "<C-R><C-W>"
+
+
+
 
