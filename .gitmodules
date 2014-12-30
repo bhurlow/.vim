@@ -28,3 +28,15 @@
 [submodule "bundle/vim-clojure"]
 	path = bundle/vim-clojure
 	url = https://github.com/vim-scripts/VimClojure.git
+[submodule "bundle/ctrlp.vim"]
+  path = bundle/ctrlp.vim
+  url = https://github.com/kien/ctrlp.vim.git
+[submodule "bundle/vim-clojure-static"]
+	path = bundle/vim-clojure-static
+	url = https://github.com/guns/vim-clojure-static.git
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "bundle/paredit"]
+	path = bundle/paredit
+	url = https://github.com/vim-scripts/paredit.vim.git
