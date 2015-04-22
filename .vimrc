@@ -10,6 +10,7 @@ set smarttab
 set autoindent
 set smartindent
 set nu
+filetype plugin on
 filetype plugin indent on
 let mapleader = ","
 set encoding=utf-8
@@ -32,6 +33,10 @@ set formatoptions=qrn1
 set pastetoggle=<leader>p
 set cmdwinheight=20
 
+au BufRead,BufNewFile *.edn set syntax=clojure
+au BufRead,BufNewFile *.edn set filetype=clojure
+au FileType edn call PareditInitBuffer()
+
 " NO SWAP FILES
 
 set noswapfile
@@ -48,10 +53,16 @@ set undodir=~/.vimundo
 
 syntax enable
 syntax on
-set background=light
+
+"set background=dark
 "colorscheme github
 colorscheme Monokai
+"colorscheme base16-ocean
 
+"let base16colorspace=256 " Access colors present in 256 colorspace
+"set t_Co=256 " 256 color mode
+"set background=dark
+"colorscheme base16-ocean
 
 " KEY MAPPING
 
@@ -67,6 +78,9 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 map <C-n> :NERDTreeToggle<CR>
 noremap % v% 
+noremap <leader>r :Require<CR>
+
+map - :Explore<CR>
 
 " FONT
 set guifont=Menlo:h13
@@ -84,6 +98,10 @@ let b:vimpipe_command="psql if"
 "inoremap { {<CR><BS>}<Esc>ko
 
 autocmd filetype lisp,scheme,art,clj setlocal equalprg=lispindent.lisp
+
+set wildignore+=*/tmp/*,*/out/*,*/target/*,*.so,*.swp,*.zip
+let g:ctrlp_working_path_mode = 'cra'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|out)$'
 
 " Silver Searcher
 if executable('ag')
@@ -103,6 +121,8 @@ endif
 
 nnoremap H :! ag --nocolor "<C-R><C-W>"
 
+" enable clojure jumping
+let g:paredit_smartjump=1
 
 
-
+let g:clj_fmt_autosave = 0
