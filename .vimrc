@@ -79,6 +79,7 @@ nnoremap <C-l> <C-w>l
 map <C-n> :NERDTreeToggle<CR>
 noremap % v% 
 noremap <leader>r :Require<CR>
+noremap r :RainbowParenthesesToggle<CR>
 
 map - :Explore<CR>
 
