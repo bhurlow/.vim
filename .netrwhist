@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/Hurlow/code/www/stonesthrowurbanfarm'
+let g:netrw_dirhist_2='/Users/Hurlow/code/www/stonesthrowurbanfarm/content'
+let g:netrw_dirhist_3='/Users/Hurlow/code/www/stonesthrowurbanfarm/content/3-contact'
+let g:netrw_dirhist_4='/Users/Hurlow/code/www/stonesthrowurbanfarm'
+let g:netrw_dirhist_5='/Users/Hurlow/code/www/stonesthrowurbanfarm/site'
+let g:netrw_dirhist_6='/Users/Hurlow/code/www/stonesthrowurbanfarm/site/templates'
+let g:netrw_dirhist_7='/Users/Hurlow/code/www/stonesthrowurbanfarm'

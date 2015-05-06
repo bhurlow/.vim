@@ -54,10 +54,13 @@ set undodir=~/.vimundo
 syntax enable
 syntax on
 
-"set background=dark
+let base16colorspace=256  " Access colors present in 256 colorspace
+set background=dark
 "colorscheme github
-colorscheme Monokai
-"colorscheme base16-ocean
+" colorscheme Monokai
+" colorscheme base16-ocean
+" colorscheme base16-default
+colorscheme base16-railscasts
 
 "let base16colorspace=256 " Access colors present in 256 colorspace
 "set t_Co=256 " 256 color mode
@@ -84,7 +87,7 @@ noremap r :RainbowParenthesesToggle<CR>
 map - :Explore<CR>
 
 " FONT
-set guifont=Menlo:h13
+set guifont=Menlo:h12
 
 " EMMET VIM
 let g:user_emmet_expandabbr_key = '<c-e>'
