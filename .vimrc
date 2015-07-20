@@ -60,7 +60,8 @@ set background=dark
 " colorscheme Monokai
 " colorscheme base16-ocean
 " colorscheme base16-default
-colorscheme base16-railscasts
+" colorscheme base16-railscasts
+colorscheme base16-default
 
 "let base16colorspace=256 " Access colors present in 256 colorspace
 "set t_Co=256 " 256 color mode
