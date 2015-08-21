@@ -102,7 +102,7 @@ let b:vimpipe_command="psql if"
 ":inoremap ( ()<Esc>i
 "inoremap { {<CR><BS>}<Esc>ko
 
-autocmd filetype lisp,scheme,art,clj setlocal equalprg=lispindent.lisp
+" autocmd filetype lisp,scheme,art,clj setlocal equalprg=lispindent.lisp
 
 set wildignore+=*/tmp/*,*/out/*,*/target/*,*.so,*.swp,*.zip
 let g:ctrlp_working_path_mode = 'cra'
@@ -129,5 +129,25 @@ nnoremap H :! ag --nocolor "<C-R><C-W>"
 " enable clojure jumping
 let g:paredit_smartjump=1
 
-
 let g:clj_fmt_autosave = 0
+
+let g:lispwords = 'dude,bob'
+
+function! ToggleLispwords(word)
+    " Strip leading namespace qualifiers and macro characters from symbol
+    let word = substitute(a:word, "\\v%(.*/|[#'`~@^,]*)(.*)", '\1', '')
+
+    if &lispwords =~# '\V\<' . word . '\>'
+        execute 'setlocal lispwords-=' . word
+        echo "Removed " . word . " from lispwords."
+    else
+        execute 'setlocal lispwords+=' . word
+        echo "Added " . word . " to lispwords."
+    endif
+endfunction
+
+nnoremap <Leader>l :<C-U>call ToggleLispwords(expand('<cword>'))<CR>
+
+
+
+
