@@ -33,8 +33,43 @@ set formatoptions=qrn1
 set pastetoggle=<leader>p
 set cmdwinheight=20
 
+vnoremap . :norm.<CR>
+
+" Steve Losh Style Mappings
+nnoremap <space> za
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap H ^
+nnoremap L $
+vnoremap jk <esc>
+inoremap jk <esc>
+inoremap <esc> <nop>
+"nnoremap ff va( 
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+nnoremap <leader>f va(
+vnoremap <leader>a 
+
+augroup filetype_clojure
+  autocmd!
+  autocmd FileType clojure setlocal foldmethod=indent
+  autocmd FileType clojure nnoremap fa zM<cr>
+  autocmd FileType clojure nnoremap ee zR<cr>
+  " autocmd FileType clojure nnoremap <leader>a dd<cr>
+augroup END
+
+:set statusline=%f         " Path to the file
+:set statusline+=%=        " Switch to the right side
+:set statusline+=%l        " Current line
+:set statusline+=/         " Separator
+:set statusline+=%L        " Total lines
+
 au BufRead,BufNewFile *.edn set syntax=clojure
-au BufRead,BufNewFile *.edn set filetype=clojure
+au BufRead,BufNewFile Dockerfile set filetype=conf
 au FileType edn call PareditInitBuffer()
 
 " NO SWAP FILES
@@ -43,7 +78,7 @@ set noswapfile
 
 " NO UNDO FILES
 
-set noundofile
+" set noundofile
 
 " SET UNDO DIRECTORY
 
@@ -70,7 +105,7 @@ colorscheme base16-default
 
 " KEY MAPPING
 
-inoremap jj <ESC>
+" inoremap jj <ESC>
 nnoremap ; :
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>ft Vatzf
@@ -88,14 +123,14 @@ noremap r :RainbowParenthesesToggle<CR>
 map - :Explore<CR>
 
 " FONT
-set guifont=Menlo:h12
+set guifont=Monaco:h12
 
 " EMMET VIM
 let g:user_emmet_expandabbr_key = '<c-e>'
 " let g:user_emmet_expandabbr_key = '<Tab>'
 let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,php,scss,css EmmetInstall
 
 let b:vimpipe_command="psql if"
 
@@ -103,6 +138,18 @@ let b:vimpipe_command="psql if"
 "inoremap { {<CR><BS>}<Esc>ko
 
 " autocmd filetype lisp,scheme,art,clj setlocal equalprg=lispindent.lisp
+" autocmd bufread,bufnewfile *.lisp,*.scm setlocal equalprg=testindent
+" autocmd bufread,bufnewfile *.boob,*.scm setlocal equalprg=xmllint\ --format\ -
+" autocmd bufread,bufnewfile *.boob,*.scm setlocal equalprg=ls
+" autocmd filetype *.boob setlocal equalprg=ls
+
+" because fish isn't bash compatible
+if &shell =~# 'fish$'
+  set shell=sh
+endif
+
+" autocmd bufread,bufnewfile *.clj setlocal equalprg=scmindent.js
+
 
 set wildignore+=*/tmp/*,*/out/*,*/target/*,*.so,*.swp,*.zip
 let g:ctrlp_working_path_mode = 'cra'
@@ -124,29 +171,28 @@ endif
 
 "nnoremap H :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-nnoremap H :! ag --nocolor "<C-R><C-W>"
+" nnoremap H :! ag --nocolor "<C-R><C-W>"
 
 " enable clojure jumping
 let g:paredit_smartjump=1
 
 let g:clj_fmt_autosave = 0
 
-let g:lispwords = 'dude,bob'
+" let g:lispwords = 'dude,bob'
 
-function! ToggleLispwords(word)
-    " Strip leading namespace qualifiers and macro characters from symbol
-    let word = substitute(a:word, "\\v%(.*/|[#'`~@^,]*)(.*)", '\1', '')
+" function! ToggleLispwords(word)
+"     let word = substitute(a:word, "\\v%(.*/|[#'`~@^,]*)(.*)", '\1', '')
 
-    if &lispwords =~# '\V\<' . word . '\>'
-        execute 'setlocal lispwords-=' . word
-        echo "Removed " . word . " from lispwords."
-    else
-        execute 'setlocal lispwords+=' . word
-        echo "Added " . word . " to lispwords."
-    endif
-endfunction
+"     if &lispwords =~# '\V\<' . word . '\>'
+"         execute 'setlocal lispwords-=' . word
+"         echo "Removed " . word . " from lispwords."
+"     else
+"         execute 'setlocal lispwords+=' . word
+"         echo "Added " . word . " to lispwords."
+"     endif
+" endfunction
 
-nnoremap <Leader>l :<C-U>call ToggleLispwords(expand('<cword>'))<CR>
+" nnoremap <Leader>l :<C-U>call ToggleLispwords(expand('<cword>'))<CR>
 
 
 

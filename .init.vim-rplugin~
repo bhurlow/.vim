@@ -1,0 +1,12 @@
+" node plugins
+call remote#host#RegisterPlugin('node', '/Users/bh/.config/nvim/rplugin/node/testy.js', [
+      \ {'sync': 0, 'name': 'Func', 'type': 'function', 'opts': {}},
+     \ ])
+
+
+" python3 plugins
+
+
+" python plugins
+
+
