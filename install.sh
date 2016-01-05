@@ -1,5 +1,6 @@
 #! /bin/bash
 
+mkdir ~/.vim/bundle
 pushd ~/.vim/bundle
 
 packages=(
