@@ -33,7 +33,17 @@ set formatoptions=qrn1
 set pastetoggle=<leader>p
 set cmdwinheight=20
 
-vnoremap . :norm.<CR>
+function! ToggleVerbose()
+    if !&verbose
+        set verbosefile=~/.log/vim/verbose.log
+        set verbose=15
+    else
+        set verbose=0
+        set verbosefile=
+    endif
+endfunction
+
+" vnoremap . :norm.<CR>
 
 " Steve Losh Style Mappings
 " nnoremap <space> za
@@ -44,18 +54,15 @@ nnoremap L $
 vnoremap jk <esc>
 inoremap jk <esc>
 inoremap <esc> <nop>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
 nnoremap <leader>f va(
 
-" augroup filetype_clojure
-"   autocmd!
-"   autocmd FileType clojure setlocal foldmethod=indent
-"   autocmd FileType clojure nnoremap fa zM<cr>
-"   autocmd FileType clojure nnoremap ee zR<cr>
-" augroup END
+nnoremap z i<space><esc>
+
+nnoremap <leader>n <Plug>(sexp_insert_at_list_tail)
 
 :set statusline=%f         
 :set statusline+=%=       
@@ -80,27 +87,27 @@ colorscheme base16-default
 " KEY MAPPING
 
 nnoremap ; :
-" nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-" nnoremap <leader>ft Vatzf
-" nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
-" nnoremap <leader>w <C-w>v<C-w><leader>t
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <leader>ft Vatzf
+nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
+nnoremap <leader>w <C-w>v<C-w><leader>t
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 " map <C-n> :NERDTreeToggle<CR>
-" noremap % v% 
-" noremap <leader>r :Require<CR>
-" map - :Explore<CR>
+noremap % v% 
+noremap <leader>r :Require<CR>
+map - :Explore<CR>
 
 " FONT
 set guifont=Monaco:h12
 
 " EMMET VIM
-"let g:user_emmet_expandabbr_key = '<c-e>'
-"let g:use_emmet_complete_tag = 1
-"let g:user_emmet_install_global = 0
-"autocmd FileType html,php,scss,css EmmetInstall
+let g:user_emmet_expandabbr_key = '<c-e>'
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_install_global = 0
+autocmd FileType html,php,scss,css EmmetInstall
 
 " because fish isn't bash compatible
 if &shell =~# 'fish$'
@@ -110,4 +117,30 @@ endif
 set wildignore+=*/tmp/*,*/out/*,*/target/*,*.so,*.swp,*.zip
 let g:ctrlp_working_path_mode = 'cra'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|out)$'
+
+
+" let g:sexp_mappings = {}
+" nmap <buffer> B <Plug>(sexp_move_to_prev_element_head)
+
+" autocmd FileType clojure
+"   autocmd!
+"   nmap <buffer> M <Plug>(sexp_insert_at_list_head)
+" augroup END
+
+augroup filetype_clojure
+  autocmd!
+  " autocmd FileType clojure setlocal foldmethod=indent
+  " autocmd FileType clojure nnoremap fa zM<cr>
+  " autocmd FileType clojure nnoremap ee zR<cr>
+  map <leader>M ((<Plug>(sexp_insert_at_list_tail)<cr>
+  map <leader>n $<cr>i
+  " nmap )) dd<cr>
+  " nnoremap M dd<cr>
+augroup END
+
+" let g:sexp_mappings = {
+"  \ 'sexp_inner_list': 'M',
+"  \ 'sexp_move_to_prev_bracket':      '<Leader>m',
+"  \ }
+
 
