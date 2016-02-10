@@ -18,6 +18,7 @@ packages=(
  bhurlow/vim-parinfer
  tpope/vim-unimpaired
  tpope/vim-speeddating
+ fatih/vim-go
 )
 
 for x in "${packages[@]}"
