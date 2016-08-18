@@ -24,6 +24,7 @@ packages=(
 for x in "${packages[@]}"
 do
   echo $var
-  git clone git@github.com:$x.git
+  git clone https://github.com/$x
+  # git clone git@github.com:$x.git
 done
 
