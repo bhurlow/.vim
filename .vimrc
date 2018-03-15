@@ -78,11 +78,25 @@ set undodir=/tmp/.vimundo
 
 " SYNTAX
 
+set background=dark
 syntax enable
 syntax on
-let base16colorspace=256  
-set background=dark
-colorscheme base16-default
+let base16colorspace=256 
+
+hi clear CursorLine
+hi Conditional ctermfg = green
+hi LineNr ctermfg = grey
+hi MatchParen ctermbg=none cterm=underline ctermfg=magenta
+hi Function ctermfg = blue
+hi Identifier ctermfg = blue
+hi Statement ctermfg = blue
+hi Statement ctermfg = cyan
+hi Exception ctermfg = green
+hi Special ctermfg = magenta
+hi Comment ctermfg = red
+hi String ctermfg = yellow
+hi jsTemplateString ctermfg = blue
+hi Type ctermfg = blue
 
 " KEY MAPPING
 
@@ -101,7 +115,7 @@ noremap <leader>r :Require<CR>
 map - :Explore<CR>
 
 " FONT
-set guifont=Monaco:h12
+set guifont=Menlo:h12
 
 " EMMET VIM
 let g:user_emmet_expandabbr_key = '<c-e>'

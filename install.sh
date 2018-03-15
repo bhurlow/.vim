@@ -19,6 +19,7 @@ packages=(
  tpope/vim-unimpaired
  tpope/vim-speeddating
  fatih/vim-go
+ pangloss/vim-javascript
 )
 
 for x in "${packages[@]}"
