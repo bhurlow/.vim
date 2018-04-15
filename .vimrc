@@ -70,6 +70,8 @@ nnoremap <leader>n <Plug>(sexp_insert_at_list_tail)
 :set statusline+=/     
 :set statusline+=%L   
 
+set mouse=a
+
 au BufRead,BufNewFile *.edn set syntax=clojure
 au BufRead,BufNewFile Dockerfile set filetype=conf
 
@@ -93,7 +95,10 @@ hi Statement ctermfg = blue
 hi Statement ctermfg = cyan
 hi Exception ctermfg = green
 hi Special ctermfg = magenta
-hi Comment ctermfg = red
+hi VertSplit ctermfg = 240
+
+" hi Comment ctermfg = white
+hi Comment ctermfg = 240
 hi String ctermfg = yellow
 hi jsTemplateString ctermfg = blue
 hi Type ctermfg = blue
@@ -121,7 +126,14 @@ set guifont=Menlo:h12
 let g:user_emmet_expandabbr_key = '<c-e>'
 let g:use_emmet_complete_tag = 1
 let g:user_emmet_install_global = 0
-autocmd FileType html,php,scss,css EmmetInstall
+
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
+
+autocmd FileType html,php,scss,css,javascript EmmetInstall
 
 " because fish isn't bash compatible
 if &shell =~# 'fish$'
@@ -184,4 +196,25 @@ let g:prettier#config#trailing_comma = 'none'
 " flow|babylon|typescript|postcss|json|graphql
 let g:prettier#config#parser = 'flow'
 
+
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+
+au VimEnter * RainbowParenthesesToggle
 
