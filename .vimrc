@@ -47,7 +47,6 @@ endfunction
 
 " Steve Losh Style Mappings
 " nnoremap <space> za
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap H ^
 nnoremap L $
@@ -59,10 +58,13 @@ inoremap <esc> <nop>
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
 nnoremap <leader>f va(
+nnoremap <leader>c :%! cljtool :fmt <cr>
 
 nnoremap z i<space><esc>
 
 nnoremap <leader>n <Plug>(sexp_insert_at_list_tail)
+nnoremap <leader>t :! clear && mocha --bail --require babel-register %:p <cr>
+nnoremap <leader>e :! clear && node %:p <cr>
 
 :set statusline=%f         
 :set statusline+=%=       
@@ -70,7 +72,7 @@ nnoremap <leader>n <Plug>(sexp_insert_at_list_tail)
 :set statusline+=/     
 :set statusline+=%L   
 
-set mouse=a
+set mouse=""
 
 au BufRead,BufNewFile *.edn set syntax=clojure
 au BufRead,BufNewFile Dockerfile set filetype=conf
@@ -185,7 +187,7 @@ let g:prettier#config#semi = 'false'
 let g:prettier#config#single_quote = 'true'
 
 " print spaces between brackets
-let g:prettier#config#bracket_spacing = 'false'
+let g:prettier#config#bracket_spacing = 'true'
 
 " put > on the last line instead of new line
 let g:prettier#config#jsx_bracket_same_line = 'true'
