@@ -85,25 +85,26 @@ set undodir=/tmp/.vimundo
 set background=dark
 syntax enable
 syntax on
-let base16colorspace=256 
+let base16colorspace=256
 
 hi clear CursorLine
 hi Conditional ctermfg = green
 hi LineNr ctermfg = grey
 hi MatchParen ctermbg=none cterm=underline ctermfg=magenta
+
 hi Function ctermfg = blue
+hi jsTemplateString ctermfg = blue
+hi Keyword ctermfg = magenta
+hi Type ctermfg = blue
+
 hi Identifier ctermfg = blue
 hi Statement ctermfg = blue
-hi Statement ctermfg = cyan
-hi Exception ctermfg = green
-hi Special ctermfg = magenta
-hi VertSplit ctermfg = 240
 
-" hi Comment ctermfg = white
-hi Comment ctermfg = 240
+hi Exception ctermfg = red
+hi Special ctermfg = magenta
 hi String ctermfg = yellow
-hi jsTemplateString ctermfg = blue
-hi Type ctermfg = blue
+hi VertSplit ctermfg = 240
+hi Comment ctermfg = 240
 
 " KEY MAPPING
 
@@ -218,8 +219,8 @@ let g:rbpt_colorpairs = [
     \ ['red',         'firebrick3'],
     \ ]
 
-au VimEnter * RainbowParenthesesToggle
 
+let g:javascript_plugin_flow = 1
 let g:ale_linters_explicit = 1
 let b:ale_linters = ['flow']
 
