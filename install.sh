@@ -21,6 +21,7 @@ packages=(
  fatih/vim-go
  pangloss/vim-javascript
  prettier/vim-prettier
+ w0rp/ale
 )
 
 for x in "${packages[@]}"

@@ -63,8 +63,8 @@ nnoremap <leader>c :%! cljtool :fmt <cr>
 nnoremap z i<space><esc>
 
 nnoremap <leader>n <Plug>(sexp_insert_at_list_tail)
-nnoremap <leader>t :! clear && mocha --bail --require babel-register %:p <cr>
-nnoremap <leader>e :! clear && node %:p <cr>
+nnoremap <leader>t :! clear && mocha --bail --require babel-register --require test/testhelper.js %:p <cr>
+nnoremap <leader>e :! clear && npx babel-node %:p <cr>
 
 :set statusline=%f         
 :set statusline+=%=       
@@ -219,4 +219,7 @@ let g:rbpt_colorpairs = [
     \ ]
 
 au VimEnter * RainbowParenthesesToggle
+
+let g:ale_linters_explicit = 1
+let b:ale_linters = ['flow']
 
