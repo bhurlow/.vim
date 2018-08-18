@@ -43,6 +43,27 @@ function! ToggleVerbose()
     endif
 endfunction
 
+function! ExecuteInShell(command) 
+    let command = join(map(split(a:command), 'expand(v:val)'))
+    let winnr = bufwinnr('^' . command . '$')
+    silent! execute  winnr < 0 ? 'botright vnew ' . fnameescape(command) : winnr . 'wincmd w'
+    setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap nonumber
+    echo 'Execute ' . command . '...'
+    silent! execute 'silent %!'. command
+    silent! redraw
+    silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
+    silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>:AnsiEsc<CR>'
+    silent! execute 'nnoremap <silent> <buffer> q :q<CR>'
+    silent! execute 'AnsiEsc'
+    echo 'Shell command ' . command . ' executed.'
+endfunction 
+command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
+nnoremap <leader>! :Shell
+
+command! -nargs=1 Silent
+\ | execute ':silent !'.<q-args>
+\ | execute ':redraw!'
+
 " vnoremap . :norm.<CR>
 
 " Steve Losh Style Mappings
@@ -58,13 +79,17 @@ inoremap <esc> <nop>
 " noremap <Left> <NOP>
 " noremap <Right> <NOP>
 nnoremap <leader>f va(
-nnoremap <leader>c :%! cljtool :fmt <cr>
 
 nnoremap z i<space><esc>
 
-nnoremap <leader>n <Plug>(sexp_insert_at_list_tail)
-nnoremap <leader>t :! clear && mocha --bail --require babel-register --require test/testhelper.js %:p <cr>
+" nnoremap <leader>n <Plug>(sexp_insert_at_list_tail)
+nnoremap <leader>t :! clear && mocha --bail --require @babel/register --require test/testhelper.js %:p <cr>
 nnoremap <leader>e :! clear && npx babel-node %:p <cr>
+
+" nnoremap <leader>n :e ~/.vimrc <cr>
+" nnoremap <leader>c :%! cljtool :fmt <cr>
+" nnoremap <leader>c :call cursor(5,5)  <cr>
+nnoremap <leader>c :%! zprint <cr>
 
 :set statusline=%f         
 :set statusline+=%=       
@@ -125,15 +150,15 @@ map - :Explore<CR>
 set guifont=Menlo:h12
 
 " EMMET VIM
-let g:user_emmet_expandabbr_key = '<c-e>'
-let g:use_emmet_complete_tag = 1
-let g:user_emmet_install_global = 0
+" let g:user_emmet_expandabbr_key = '<c-e>'
+" let g:use_emmet_complete_tag = 1
+" let g:user_emmet_install_global = 0
 
-let g:user_emmet_settings = {
-\  'javascript' : {
-\      'extends' : 'jsx',
-\  },
-\}
+" let g:user_emmet_settings = {
+" \  'javascript' : {
+" \      'extends' : 'jsx',
+" \  },
+" \}
 
 autocmd FileType html,php,scss,css,javascript EmmetInstall
 
@@ -218,8 +243,8 @@ let g:rbpt_colorpairs = [
     \ ['red',         'firebrick3'],
     \ ]
 
-au VimEnter * RainbowParenthesesToggle
 
+let g:javascript_plugin_flow = 1
 let g:ale_linters_explicit = 1
 let b:ale_linters = ['flow']
 
