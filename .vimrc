@@ -21,7 +21,18 @@ set showcmd
 set hidden
 set wildmenu
 set wildmode=list:longest
-set visualbell
+
+" set visualbell
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+set relativenumber
+
+imap <Tab> <C-x><C-f>
+
+
 set cursorline
 set ttyfast
 set backspace=indent,eol,start
@@ -41,6 +52,25 @@ function! ToggleVerbose()
         set verbose=0
         set verbosefile=
     endif
+endfunction
+
+function! RemoteEval()
+
+  let [win, line, col, offset] = getpos('.')
+  let path = expand('%:p') 
+
+  let payload = { "version": 1 }
+  let payload.line = line
+  let payload.col = col
+  let payload.path = path
+
+  let strData = json_encode(payload)
+  let cmdS = join(['echo', "'", strData, "'", '|', 'nc localhost 8080'], ' ')
+
+  let res = system(cmdS)
+
+  echo res
+
 endfunction
 
 function! ExecuteInShell(command) 
@@ -68,7 +98,8 @@ command! -nargs=1 Silent
 
 " Steve Losh Style Mappings
 " nnoremap <space> za
-nnoremap <leader>sv :source $MYVIMRC<cr>
+" nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>sv :source /Users/pretzel/code/cljs/lumo-remote-2/lumo.vim<cr>
 nnoremap H ^
 nnoremap L $
 vnoremap jk <esc>
@@ -83,8 +114,12 @@ nnoremap <leader>f va(
 nnoremap z i<space><esc>
 
 " nnoremap <leader>n <Plug>(sexp_insert_at_list_tail)
-nnoremap <leader>t :! clear && mocha --bail --require @babel/register --require test/testhelper.js %:p <cr>
-nnoremap <leader>e :! clear && npx babel-node %:p <cr>
+
+nnoremap <leader>t :! clear && DEBUG='yd:*' mocha --bail --require @babel/register --require test/testhelper.js %:p <cr>
+" nnoremap <leader>t :! clear && jest %:p <cr>
+
+" nnoremap <leader>e :! clear && npx babel-node %:p <cr>
+nnoremap <leader>e :! clear && node %:p <cr>
 
 " nnoremap <leader>n :e ~/.vimrc <cr>
 " nnoremap <leader>c :%! cljtool :fmt <cr>
@@ -107,7 +142,8 @@ set undodir=/tmp/.vimundo
 
 " SYNTAX
 
-set background=dark
+" set background=dark
+set background=light
 syntax enable
 syntax on
 let base16colorspace=256
@@ -151,17 +187,19 @@ map - :Explore<CR>
 set guifont=Menlo:h12
 
 " EMMET VIM
-" let g:user_emmet_expandabbr_key = '<c-e>'
-" let g:use_emmet_complete_tag = 1
-" let g:user_emmet_install_global = 0
+let g:user_emmet_expandabbr_key = '<c-e>'
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_install_global = 0
 
-" let g:user_emmet_settings = {
-" \  'javascript' : {
-" \      'extends' : 'jsx',
-" \  },
-" \}
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
 
 autocmd FileType html,php,scss,css,javascript EmmetInstall
+
+" autocmd FileType haskell setlocal commentstring=###\ %s
 
 " because fish isn't bash compatible
 if &shell =~# 'fish$'
@@ -247,5 +285,5 @@ let g:rbpt_colorpairs = [
 
 let g:javascript_plugin_flow = 1
 let g:ale_linters_explicit = 1
-let b:ale_linters = ['flow']
+let b:ale_linters = ['haskell']
 
